@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { validateToken } from "./api/auth";
 
@@ -25,8 +25,10 @@ export default function Home() {
     }, [searchParams]);
 
     return (
-      <div className="min-h-dvh flex justify-center items-center font-mono text-5xl">
-        {isAuthorized ? "Welcome to this secret widget" : "Unauthorized"}
-      </div>
+      <Suspense>
+        <div className="min-h-dvh flex justify-center items-center font-mono text-5xl">
+          {isAuthorized ? "Welcome to this secret widget" : "Unauthorized"}
+        </div>
+      </Suspense>
     )
 }
